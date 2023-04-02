@@ -5,7 +5,7 @@
         public DevEvent()
         {
             Speakers = new List<DevEventSpeaker>();
-            isDeleted = false;
+            IsDeleted = false;
         }
 
         public Guid Id { get; set; }
@@ -14,7 +14,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public List<DevEventSpeaker> Speakers { get; set; }
-        public bool isDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         public void Update(String title, String description, DateTime startDate, DateTime endDate) 
         {
@@ -26,7 +26,7 @@
 
         public void Delete()
         {
-            isDeleted = true;
+            IsDeleted = true;
         }
     }
 }
