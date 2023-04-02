@@ -1,6 +1,5 @@
 ﻿using DevEvents.API.Entities;
 using DevEvents.API.Persistence;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevEvents.API.Controllers
@@ -18,7 +17,7 @@ namespace DevEvents.API.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var devEvents = _context.DevEvents.Where(d => !d.isDeleted).ToList();
+            var devEvents = _context.DevEvents.Where(d => !d.IsDeleted).ToList();
 
             return Ok(devEvents);
         }
@@ -70,6 +69,21 @@ namespace DevEvents.API.Controllers
             }
 
             devEvent.Delete();
+
+            return NoContent();
+        }
+
+        [HttpPost("{id}/speaker")]
+        public IActionResult PostSpeaker(Guid id, DevEventSpeaker speaker)
+        {
+            var devEvent = _context.DevEvents.SingleOrDefault(d => d.Id == id);
+
+            if (devEvent == null)
+            {
+                return NotFound();
+            }
+
+            devEvent.Speakers.Add(speaker);
 
             return NoContent();
         }
